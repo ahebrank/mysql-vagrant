@@ -11,4 +11,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "install.sh"
   config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=666"]
   config.vm.network "private_network", ip: "33.33.33.10"
+
+  if Vagrant.has_plugin?("vagrant-hostsupdater")
+    config.vm.hostname = "mysql"
+    config.hostsupdater.remove_on_suspend = true
+  end
 end
